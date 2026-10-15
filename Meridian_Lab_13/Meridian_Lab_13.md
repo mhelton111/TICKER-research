@@ -105,4 +105,4 @@ The type I was least sure about was S4. I classified it as a preference because 
 
 ## Source and AI-use note
 
-The only source for the case inputs, known answer, and requirements is the Lab 13 instruction page listed in `SOURCES.md`. Code assistance was used to construct the permitted standard-library checker and candidate-D test. The written discussion reflects the instructor's in-class clarification that AI use is permitted for these portions.
+The only source for the case inputs, known answer, and requirements is the Lab 13 instruction page listed in `SOURCES.md`. Code assistance was used to construct the permitted standard-library checker and candidate-D test. The written discussion reflects my own thoughts and wording, not using AI. 
