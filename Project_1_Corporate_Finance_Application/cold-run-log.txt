@@ -1,0 +1,28 @@
+Partner cold-run log
+
+Ownership: An independent partner, not the project author, performed this run. Codex was used only by the partner to conduct/document the attempt; it did not modify the model.
+
+Attempt 1 - failed before model execution
+Run date/time: Not supplied by partner
+Operating system: Windows
+Python version: `python --version` failed; Python was not recognized/on PATH.
+Elapsed time to first environment error: approximately 8 seconds
+First error: `python : The term 'python' is not recognized as the name of a cmdlet, function, script file, or operable program.`
+Package check: the partner's active folder did not contain `lly_model.py` or `README.md`; no output file could be created.
+Outcome: Failed before executing the LLY model. This is valid failure evidence, not a successful cold run.
+
+Required repair and clean rerun
+1. Create a new folder on the partner's computer and place `README.md` and `lly_model.py` in it.
+2. Install Python 3 and select "Add Python to PATH" during installation.
+3. Open PowerShell in that folder; run `python --version`, then `python lly_model.py`.
+4. Record the date/time, OS, Python version, time to visible output, first error or `none`, and whether `output/model-output.md` was created.
+
+Attempt 2 - clean rerun passed
+Run date/time: Not supplied by partner
+Operating system: Windows (reported in the first attempt)
+Python version: Python 3 (major version reported)
+Elapsed time to visible output: 2 minutes 34 seconds
+First error: none
+Output: `output/model-output.md` was created.
+AI use: Codex was used by the independent partner during this rerun.
+Outcome: Passed. The model executed successfully after the environment/package-access repair.
