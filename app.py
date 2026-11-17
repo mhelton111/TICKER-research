@@ -4,6 +4,7 @@ from dataclasses import replace
 from datetime import datetime, timezone
 import pandas as pd
 import requests
+import altair as alt
 import streamlit as st
 from portfolio import benchmark, equal_weight, evaluate, load_estimates, optimize, verdict
 from lly_dcf import BASE_CASE, build, valuation
@@ -70,8 +71,16 @@ card(right, "Constrained decision", choice)
 if choice:
     chart_rows = pd.DataFrame({"Portfolio": ["Equal weight", "60/40 VTI/LQD", "Constrained"], "Return": [base["return"], reference["return"], choice["return"]], "Volatility": [base["volatility"], reference["volatility"], choice["volatility"]]}).set_index("Portfolio")
     st.subheader("Interactive portfolio comparison")
-    st.scatter_chart(chart_rows, x="Volatility", y="Return", size=[130, 130, 180], color="#38bdf8")
-    st.bar_chart(pd.DataFrame({"Weight": choice["weights"]}))
+    st.altair_chart(alt.Chart(chart_rows.reset_index()).mark_circle(size=170).encode(
+        x=alt.X("Volatility:Q", title="Estimated annual volatility", axis=alt.Axis(format="%")),
+        y=alt.Y("Return:Q", title="Estimated annual return", axis=alt.Axis(format="%")),
+        color=alt.Color("Portfolio:N", legend=None),
+        tooltip=[alt.Tooltip("Portfolio:N"), alt.Tooltip("Return:Q", format=".2%"), alt.Tooltip("Volatility:Q", format=".2%")]
+    ).interactive(), use_container_width=True)
+    weight_data = pd.DataFrame({"Ticker": list(choice["weights"]), "Weight": list(choice["weights"].values())})
+    st.altair_chart(alt.Chart(weight_data).mark_bar(color="#38bdf8").encode(
+        x=alt.X("Ticker:N"), y=alt.Y("Weight:Q", axis=alt.Axis(format="%")), tooltip=[alt.Tooltip("Ticker:N"), alt.Tooltip("Weight:Q", format=".0%")]
+    ), use_container_width=True)
 
 st.divider()
 a, b, c = st.columns(3)
@@ -113,7 +122,11 @@ with tab5:
         try:
             symbol, history = fetch_ticker_history(typed)
             st.metric(f"{symbol} latest returned close", f"${history['Close'].iloc[-1]:,.2f}", history.index[-1].strftime("%Y-%m-%d %H:%M UTC"))
-            st.line_chart(history)
+            ticker_chart = history.reset_index()
+            st.altair_chart(alt.Chart(ticker_chart).mark_line(color="#38bdf8").encode(
+                x=alt.X("Date:T", title="Date"), y=alt.Y("Close:Q", title="Close (USD)", scale=alt.Scale(zero=False)),
+                tooltip=[alt.Tooltip("Date:T", title="Date"), alt.Tooltip("Close:Q", title="Close", format="$.2f")]
+            ).interactive(), use_container_width=True)
             st.caption("Source: Yahoo Finance chart endpoint. Display data may be delayed and is not used by the optimizer.")
         except (requests.RequestException, KeyError, IndexError, TypeError, ValueError) as error:
             st.error(f"Ticker data unavailable: {error}")
@@ -121,10 +134,12 @@ with tab5:
     fed_left, fed_right = st.columns(2)
     with fed_left:
         dgs10 = saved_fred("DGS10")
-        st.line_chart(dgs10.loc["2020-01-01":])
+        dgs_plot=dgs10.loc["2020-01-01":].reset_index()
+        st.altair_chart(alt.Chart(dgs_plot).mark_line(color="#38bdf8").encode(x=alt.X("observation_date:T",title="Date"),y=alt.Y("DGS10:Q",title="Percent",scale=alt.Scale(zero=False)),tooltip=[alt.Tooltip("observation_date:T",title="Date"),alt.Tooltip("DGS10:Q",title="DGS10",format=".2f")]).interactive(),use_container_width=True)
         st.caption("DGS10: 10-year Treasury yield, saved ALFRED vintage as known on 2026-10-05.")
     with fed_right:
         funds = saved_fred("FEDFUNDS")
-        st.line_chart(funds.loc["2020-01-01":])
+        funds_plot=funds.loc["2020-01-01":].reset_index()
+        st.altair_chart(alt.Chart(funds_plot).mark_line(color="#f59e0b").encode(x=alt.X("observation_date:T",title="Date"),y=alt.Y("FEDFUNDS:Q",title="Percent",scale=alt.Scale(zero=False)),tooltip=[alt.Tooltip("observation_date:T",title="Date"),alt.Tooltip("FEDFUNDS:Q",title="Fed funds rate",format=".2f")]).interactive(),use_container_width=True)
         st.caption("FEDFUNDS: effective federal funds rate, saved ALFRED vintage as known on 2026-10-05.")
     st.info("These rate charts provide macro and discount-rate context. They are not silently inserted into the portfolio optimizer or LLY WACC. See docs/data-card.md for the point-in-time rule.")
