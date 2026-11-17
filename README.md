@@ -30,6 +30,7 @@ This writes `output/model-output.md`. Run the app with `streamlit run app.py`; v
 - `docs/decision-memo.md`
 - `docs/validation-and-ai-use.md`
 - `docs/partner-discussion.md`
+- `docs/labs-13-19-integration.md`
 - `SOURCES.md`
 
 Three recordings/transcripts must be added by the student for final Project 2 submission. The `docs/manifest.md` lists every required artifact and records that status truthfully.

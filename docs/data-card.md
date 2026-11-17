@@ -10,6 +10,6 @@
 | LLY role | Comparison/context only; excluded from optimizer and allocation weights. |
 | Macro timing rule | Lab 17 admits DGS10 only with the ALFRED vintage available on the decision date and execution no earlier than the next tradable session. |
 | Federal Reserve charts | `data/DGS10_2026-10-05.csv` and `data/FEDFUNDS_2026-10-05.csv`, copied unchanged from Lab 17's ALFRED-vintage evidence. |
-| Ticker explorer | User-entered symbol; six-month daily close display fetched from Yahoo Finance only when the user requests it. It is informational and never optimizer input. |
+| Company-context selector | User-entered symbol changes the research-context header only. The public dashboard intentionally does not claim a live quote when an unauthenticated market-data provider is unavailable. It is informational and never an optimizer input. |
 
 This separates observation date, data availability, and calculation cutoff, applying the provenance lessons from Labs 16 and 17.

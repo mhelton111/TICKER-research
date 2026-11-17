@@ -88,7 +88,7 @@ a.metric("LLY reference close", "$1,431.67", "2026-11-16 close")
 b.metric("Point-in-time rule", "After close", "No same-day pre-close use")
 c.metric("Decision", "PILOT", "not adopt")
 
-tab1, tab2, tab3, tab4, tab5 = st.tabs(["Decision rationale", "Stress & stop rule", "Evidence boundary", "LLY driver lab", "Market and Fed explorer"])
+tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["Decision rationale", "Stress & stop rule", "Evidence boundary", "LLY driver lab", "Market and Fed explorer", "Lab evidence"])
 with tab1:
     st.write("The constrained portfolio is selected only from portfolios that meet the stated return objective and BIL/IEF reserve rule. The baselines remain visible because a higher return does not excuse a reserve-rule failure.")
 with tab2:
@@ -143,3 +143,16 @@ with tab5:
         st.altair_chart(alt.Chart(funds_plot).mark_line(color="#f59e0b").encode(x=alt.X("observation_date:T",title="Date"),y=alt.Y("FEDFUNDS:Q",title="Percent",scale=alt.Scale(zero=False)),tooltip=[alt.Tooltip("observation_date:T",title="Date"),alt.Tooltip("FEDFUNDS:Q",title="Fed funds rate",format=".2f")]).interactive(),use_container_width=True)
         st.caption("FEDFUNDS: effective federal funds rate, saved ALFRED vintage as known on 2026-10-05.")
     st.info("These rate charts provide macro and discount-rate context. They are not silently inserted into the portfolio optimizer or LLY WACC. See docs/data-card.md for the point-in-time rule.")
+with tab6:
+    st.subheader("How Labs 13 through 19 enter this project")
+    evidence = pd.DataFrame([
+        ["Lab 13", "Mandate", "Objective, reserve, long-only, benchmark, liquidity, and unresolved loss rule."],
+        ["Lab 14", "Baselines", "Equal weight and 60/40 reference remain visible with separate verdicts."],
+        ["Lab 15", "Stability", "5% grid search, saved monthly adjusted closes, and objective stress."],
+        ["Lab 16", "Provenance", "Observation date, publication timing, and source boundary are disclosed."],
+        ["Lab 17", "Point in time", "Preserved DGS10 and FEDFUNDS ALFRED-vintage context; no look-ahead use."],
+        ["Lab 18", "Evidence discipline", "Mechanical calculations are separated from judgment and unsupported facts are not invented."],
+        ["Lab 19", "LLY screen", "LLY business-quality panel is a follow-up context screen, not a buy/sell signal."],
+    ], columns=["Lab", "Contribution", "Project use"])
+    st.dataframe(evidence, hide_index=True, use_container_width=True)
+    st.caption("Complete evidence mapping, file paths, and source links are preserved in docs/labs-13-19-integration.md.")
