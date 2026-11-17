@@ -9,6 +9,6 @@
 | Partner cold run | `docs/partner-discussion.md` | Complete |
 | Data card | `docs/data-card.md` | Complete |
 | Sources | `SOURCES.md` | Complete |
-| Video 1 + transcript | Student-created artifact | Not yet created/linked |
-| Video 2 + transcript | Student-created artifact | Not yet created/linked |
-| Video 3 + transcript | Student-created artifact | Not yet created/linked |
+| Video 1 speaking script | `videos/Video_1_Research_Evolution_Transcript.docx` | Complete; recording and YouTube link not yet created |
+| Video 2 speaking script | `videos/Video_2_Code_and_Validation_Transcript.docx` | Complete; recording and YouTube link not yet created |
+| Video 3 speaking script | `videos/Video_3_Committee_Presentation_Transcript.docx` | Complete; recording and YouTube link not yet created |

@@ -33,3 +33,7 @@ This writes `output/model-output.md`. Run the app with `streamlit run app.py`; v
 - `SOURCES.md`
 
 Three recordings/transcripts must be added by the student for final Project 2 submission. The `docs/manifest.md` lists every required artifact and records that status truthfully.
+
+## Public dashboard
+
+The public dashboard is available at https://meridian-reserve-decision-desk.caringdace16.chatgpt.site. It is a static public companion that mirrors the decision, comparisons, and documented stress. The canonical Python app remains `app.py`.
