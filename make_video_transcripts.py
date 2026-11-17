@@ -75,7 +75,8 @@ make('Video_2_Code_and_Validation_Transcript.docx','Video 2 Code and Validation'
 make('Video_3_Committee_Presentation_Transcript.docx','Video 3 Committee Presentation', 'Open with the live app and deliver a direct committee recommendation.', [
 ('Opening with the app',[
 "Hello. I am opening with the Meridian Reserve Decision Desk running live. My recommendation is pilot, not adopt.",
-"This tool is an educational analysis, not investment advice. It is designed to make the mandate verdict, the assumptions, and the decision limits visible to a committee."
+"This tool is an educational analysis, not investment advice. It is designed to make the mandate verdict, the assumptions, and the decision limits visible to a committee.",
+"In the first thirty seconds, I will open the LLY driver lab. It has bounded WACC, volume, margin, and capex controls with a reset. I use this panel to show sensitivity, not to override the diversified-fund mandate."
 ]),
 ('Committee recommendation',[
 "The process selects the lowest estimated-volatility long-only portfolio that reaches a 6.5 percent estimated annual return and keeps at least 3 percent in BIL or IEF reserve assets.",
