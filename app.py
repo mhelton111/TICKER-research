@@ -1,6 +1,9 @@
 """Meridian Reserve Decision Desk — Project 2 Streamlit application."""
 from pathlib import Path
 from dataclasses import replace
+from datetime import datetime, timezone
+import pandas as pd
+import requests
 import streamlit as st
 from portfolio import benchmark, equal_weight, evaluate, load_estimates, optimize, verdict
 from lly_dcf import BASE_CASE, build, valuation
@@ -14,6 +17,27 @@ st.caption("Decision-ready portfolio process • Educational analysis, not inves
 st.info("AI tools assisted with implementation and documentation. The analysis and decision require student review and ownership.")
 
 sleeves, corr = load_estimates(DATA)
+
+@st.cache_data(ttl=900, show_spinner=False)
+def fetch_ticker_history(ticker):
+    """Fetch a user-requested ticker for display only; never optimizer input."""
+    ticker = ticker.strip().upper()
+    if not ticker or not all(ch.isalnum() or ch in '.-' for ch in ticker):
+        raise ValueError("Use letters, numbers, periods, or hyphens only.")
+    response = requests.get(f"https://query1.finance.yahoo.com/v8/finance/chart/{ticker}", params={"range":"6mo","interval":"1d"}, timeout=12)
+    response.raise_for_status()
+    result = response.json()["chart"]["result"][0]
+    rows = [(datetime.fromtimestamp(t, timezone.utc), c) for t,c in zip(result["timestamp"], result["indicators"]["quote"][0]["close"]) if c is not None]
+    if not rows: raise ValueError("No usable daily closes returned.")
+    return ticker, pd.DataFrame(rows, columns=["Date", "Close"]).set_index("Date")
+
+def saved_fred(series):
+    frame = pd.read_csv(ROOT / "data" / f"{series}_2026-10-05.csv")
+    date_column = frame.columns[0]
+    frame[date_column] = pd.to_datetime(frame[date_column])
+    value_column = frame.columns[1]
+    frame[value_column] = pd.to_numeric(frame[value_column], errors="coerce")
+    return frame.dropna().set_index(date_column)[[value_column]].rename(columns={value_column: series})
 with st.sidebar:
     st.header("Mandate controls")
     objective = st.slider("Estimated annual return objective", 3.0, 10.0, 6.5, 0.1) / 100
@@ -43,13 +67,19 @@ card(left, "Equal-weight baseline", base)
 card(middle, "60/40 VTI/LQD baseline", reference)
 card(right, "Constrained decision", choice)
 
+if choice:
+    chart_rows = pd.DataFrame({"Portfolio": ["Equal weight", "60/40 VTI/LQD", "Constrained"], "Return": [base["return"], reference["return"], choice["return"]], "Volatility": [base["volatility"], reference["volatility"], choice["volatility"]]}).set_index("Portfolio")
+    st.subheader("Interactive portfolio comparison")
+    st.scatter_chart(chart_rows, x="Volatility", y="Return", size=[130, 130, 180], color="#38bdf8")
+    st.bar_chart(pd.DataFrame({"Weight": choice["weights"]}))
+
 st.divider()
 a, b, c = st.columns(3)
 a.metric("LLY reference close", "$1,431.67", "2026-11-16 close")
 b.metric("Point-in-time rule", "After close", "No same-day pre-close use")
 c.metric("Decision", "PILOT", "not adopt")
 
-tab1, tab2, tab3, tab4 = st.tabs(["Decision rationale", "Stress & stop rule", "Evidence boundary", "LLY driver lab"])
+tab1, tab2, tab3, tab4, tab5 = st.tabs(["Decision rationale", "Stress & stop rule", "Evidence boundary", "LLY driver lab", "Market and Fed explorer"])
 with tab1:
     st.write("The constrained portfolio is selected only from portfolios that meet the stated return objective and BIL/IEF reserve rule. The baselines remain visible because a higher return does not excuse a reserve-rule failure.")
 with tab2:
@@ -76,3 +106,25 @@ with tab4:
     q2.metric("LLY reference close", "$1,431.67", "2026-11-16 close")
     q3.metric("Terminal-value share", f"{value['tv_share']:.1%}")
     st.warning("Most distrusted input: WACC. The prior model used an analyst-judgment 8.5% rate. Use `docs/wacc-rebuild.md` before treating a revised rate as decision evidence.")
+with tab5:
+    st.subheader("Type any public ticker")
+    typed = st.text_input("Ticker", value="LLY", max_chars=12, key="market_ticker")
+    if st.button("Load ticker chart", key="load_ticker"):
+        try:
+            symbol, history = fetch_ticker_history(typed)
+            st.metric(f"{symbol} latest returned close", f"${history['Close'].iloc[-1]:,.2f}", history.index[-1].strftime("%Y-%m-%d %H:%M UTC"))
+            st.line_chart(history)
+            st.caption("Source: Yahoo Finance chart endpoint. Display data may be delayed and is not used by the optimizer.")
+        except (requests.RequestException, KeyError, IndexError, TypeError, ValueError) as error:
+            st.error(f"Ticker data unavailable: {error}")
+    st.subheader("Federal Reserve context from Lab 17")
+    fed_left, fed_right = st.columns(2)
+    with fed_left:
+        dgs10 = saved_fred("DGS10")
+        st.line_chart(dgs10.loc["2020-01-01":])
+        st.caption("DGS10: 10-year Treasury yield, saved ALFRED vintage as known on 2026-10-05.")
+    with fed_right:
+        funds = saved_fred("FEDFUNDS")
+        st.line_chart(funds.loc["2020-01-01":])
+        st.caption("FEDFUNDS: effective federal funds rate, saved ALFRED vintage as known on 2026-10-05.")
+    st.info("These rate charts provide macro and discount-rate context. They are not silently inserted into the portfolio optimizer or LLY WACC. See docs/data-card.md for the point-in-time rule.")

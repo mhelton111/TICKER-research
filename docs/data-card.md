@@ -9,5 +9,7 @@
 | LLY timing | Treat as observable only after the 2026-11-16 U.S. market close; no same-day pre-close decision use. |
 | LLY role | Comparison/context only; excluded from optimizer and allocation weights. |
 | Macro timing rule | Lab 17 admits DGS10 only with the ALFRED vintage available on the decision date and execution no earlier than the next tradable session. |
+| Federal Reserve charts | `data/DGS10_2026-10-05.csv` and `data/FEDFUNDS_2026-10-05.csv`, copied unchanged from Lab 17's ALFRED-vintage evidence. |
+| Ticker explorer | User-entered symbol; six-month daily close display fetched from Yahoo Finance only when the user requests it. It is informational and never optimizer input. |
 
 This separates observation date, data availability, and calculation cutoff, applying the provenance lessons from Labs 16 and 17.

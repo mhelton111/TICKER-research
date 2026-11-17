@@ -7,6 +7,8 @@
 | Portfolio data | `data/prices_through_2026-10-19.csv` | Saved monthly adjusted closes used in calculation. |
 | LLY close | https://stockanalysis.com/stocks/lly/history/ | $1,431.67 close on 2026-11-16. |
 | Point-in-time method | `Lab_16`, `Lab_17` prior-lab evidence | Observation/date-boundary convention. |
+| Rate-chart inputs | `data/DGS10_2026-10-05.csv`, `data/FEDFUNDS_2026-10-05.csv` | Preserved ALFRED vintages copied from Lab 17. |
+| Typed ticker explorer | https://query1.finance.yahoo.com/v8/finance/chart/ | User-requested six-month daily-close display; data are not optimizer inputs. |
 | LLY screen boundary | `Lab_19/LLY_*_memo.md` | Financial-statement screen used only as bounded context. |
 
 All local files used by this project are copied or generated in this `Project_2` folder, except the named prior-lab evidence above, which remains in the workspace for traceability.
