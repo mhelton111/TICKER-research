@@ -1,0 +1,41 @@
+OpenAI Codex assisted implementation and documentation, but I checked the analysis and own the decision.
+
+This is educational analysis only and not investment advice.
+
+Video 3 Committee Presentation
+I am opening with my app. My recommendation for the committee is Pilot, not Adopt. I would ask the committee for approval of a paper pilot only with 0% live capital until the outstanding governance rules are defined. The model selects the lowest estimated-volatility, long-only portfolio that reaches a 6.5% estimated annual return
+Matthew C Helton 0 minutes 24 seconds
+and at least 3% BIL or IEF reserve. The current constrained result is 65% BIL, 30% VTI, and 5% XLV, as you can see down here.
+Matthew C Helton 0 minutes 37 seconds
+It passes the modeled rules. The baselines show why this is not a picked answer. Equal weight has reserve but misses the return objective.
+Matthew C Helton 0 minutes 50 seconds
+The 60-40 VTI LQD benchmarks meets the return objective but fails the reserve requirement because it holds no BIL or IEF. I prioritize a credible return objective and liquidity for future obligations. A committee cannot promise to avoid all losses. Markets have down years, as we've seen. The reserve is there, 
+Matthew C Helton 1 minute 10 seconds
+so obligations can be met without failing at the worst time. The BIL-heavy result is appropriate for a paper pilot because it clears the modeled objective with the least estimated risk. If the committee asks for more return, more VTI and XLV can be reasonable, but the committee is accepting more volatility. A younger individual like myself may have time to recover.
+Matthew C Helton 1 minute 31 seconds
+This mandate must instead respect cash flow needs, retirement adjacent clients, and crisis conditions. My recommendation is therefore not that 65% BIL is ideal forever. It is the current best modeled answer under this objective, reserve floor, 5% grid, and historical sample.
+Matthew C Helton 1 minute 50 seconds
+A new return objective, a different reserve floor, or a new approved loss rule can change the result. That is exactly why the tool exposes the constraints rather than treating the allocation as a black box. For example, I can increase the annual return and it gives us new benchmark results.
+Matthew C Helton 2 minutes 10 seconds
+And also a new grid.
+Matthew C Helton 2 minutes 13 seconds
+Um, so I'm just gonna go right down.
+Matthew C Helton 2 minutes 17 seconds
+The ETF return, volatility, and correlation inputs are historical estimates, not promises. LLY is a separately dated research-context signal, not an optimizer sleeve. It has performed strongly over the past five years.
+Matthew C Helton 2 minutes 34 seconds
+But one stock cannot provide the risk mitigation of diversification. The LLY reverse-DCF check is also context. It requires 5.52% terminal growth versus a 3% base to equal its older reference price. I use that difference to question assumptions, not
+Matthew C Helton 2 minutes 54 seconds
+Create a trade signal.
+Matthew C Helton 2 minutes 56 seconds
+The stress and stop rule changes estimates, lookback window, costs, and constraints. It remains feasible, but is sensitive to assumptions. I stop the process if there is no feasible mix, a modeled rule fails, point-in-time timing cannot be defended, or the CIO does not define the liquidity, issuer, and loss methods
+Matthew C Helton 3 minutes 16 seconds
+or credible public governance or legal disclosures require a fresh review. For example, under the 1% expected return haircut, the model moves from 65% BIL, 30% VTI, and 5% XLV to 50% BIL, 35% VTI, and 15% XLV.
+Matthew C Helton 3 minutes 37 seconds
+Estimated volatility rises from 5.2% to 7.07%. That does not prove the stressed mix will earn more. It shows the economic trade-off the committee will be taking if the required return remains in place while estimates worsen. The shorter window stress moves heavily towards BIL.
+Matthew C Helton 3 minutes 56 seconds
+which is another warning against treating one historical sample as permanent truth. The cost stress and tighter-constraint stress also remain feasible, but their different weights reinforce the same conclusion. The allocation is a decision aid that needs monitoring, not an autopilot instruction. My proposed calendar-year loss definition is total return from January 1 through December 31.
+Matthew C Helton 4 minutes 17 seconds
+A 10% breach should pause new allocations and discretionary rebalancing, trigger calculation review and committee notification, and require a documented response. The paper pilot preserves data dates, baselines, stress checks, and reversal triggers. It does not promise to time the market. It makes the committee's decision rules
+Matthew C Helton 4 minutes 36 seconds
+testable. Thank you.
+

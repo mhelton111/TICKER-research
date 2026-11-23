@@ -1,0 +1,37 @@
+OpenAI Codex assisted implementation and documentation, but I checked the analysis and own the decision.
+
+This is educational analysis only and not investment advice.
+
+Video 2 Code and Validation
+The README gives a clean user four commands: install requirements, run the tests, run the visible analysis, and start Streamlit.
+Matthew C Helton 0 minutes 13 seconds
+This is the visible decision record produced by the analysis command. A viewer can see the portfolio results, baseline verdicts, and stress output without opening the Streamlit app. Portfolio.py is found here.
+Matthew C Helton 0 minutes 30 seconds
+In portfolio.py, it reads the saved monthly adjusted-close data for BIL, IEF, LQD, VTI, and XLV. It converts adjacent prices into monthly returns, annualizes the mean return, annualizes sample volatility, and calculates the correlation matrix. The evaluate function
+Matthew C Helton 0 minutes 49 seconds
+calculates expected return, correlation-based portfolio volatility, and reserve weight. The verdict function tests the return objective and reserve minimum separately. The optimizer tests every long-only 5% mix, rejects mixes that miss either rule, and keeps the feasible mix with the lowest estimated volatility. This separation is important for the committee.
+Matthew C Helton 1 minute 8 seconds
+A portfolio can have a return high enough to look attractive and still fail the reserve rule. This is what happens with the 60-40 benchmark. Conversely, a portfolio can have ample reserve and still miss the return objective, which is what happens with the equal weight. Showing the specific failed rule makes the result decision useful instead of simply labeling portfolios good.
+Matthew C Helton 1 minute 27 seconds
+or bad. The 5% grid, which is found on here, is also intentional. It is not a claim that 5% is the mathematically perfect increment. It is a transparent and explainable implementation choice for a small 5 ETF mandate. A committee can reproduce the search, see every constraint, and understand what the selected result won.
+Matthew C Helton 1 minute 47 seconds
+I'll run the test
+Matthew C Helton 1 minute 54 seconds
+install the packages. I have project 2 loaded right here in a new terminal.
+Matthew C Helton 2 minutes 5 seconds
+So here we are running the test.
+Matthew C Helton 2 minutes 10 seconds
+Creating a visible output here, you see "Ran 9 tests" and "OK." If I launch the Streamlit app, it is the same app shown in Video 1. The nine tests check baseline failures, the constrained result, estimate and cost stress effects, the shorter-window run, no
+Matthew C Helton 2 minutes 35 seconds
+feasible-mix behavior, and invalid-correlation rejection. The stress suite changes one input family at a time: a 1% return haircut, a trailing 36-month window, a 0.25% annual cost drag, and tighter reserve constraints. The weights change across cases, so I treat the output as sensitivity analysis, not a forecast. AI accelerated the build, but I checked the math and decision bridge.
+Matthew C Helton 2 minutes 58 seconds
+I verified that weights sum to 100%, that the app names the specific failed rule, and it refuses an infeasible mandate, which I can show right here in the same result. It's not feasible. I also checked the inputs before trusting the outputs. The program rejects missing values, negative volatility, invalid or asymmetric correlations, negative costs, and weights that do not sum to 100%.
+Matthew C Helton 3 minutes 21 seconds
+Those checks matter because a portfolio calculation can produce a clean-looking number even when the input structure is broken. In the app, an unavailable typed ticker is display-only and cannot change the allocation. So outside data does not silently move the committee recommendation. My proposed loss convention is calendar-year total return from January 1 through December 31.
+Matthew C Helton 3 minutes 41 seconds
+Following A 10% breach, the committee should pause new allocations in discretionary rebalancing, verify the calculation, notify the committee, and document a reduced risk or exception decision. The app does not call that rule passed until the CIO approves the definition and response. That limitation is deliberate.
+Matthew C Helton 4 minutes
+I could have written a threshold into the code and displayed a green pass label, but that would not create a false precision. Or that, I mean, sorry, that would create a false precision. Before Live Capital, the CIO needs to define the exact return series and who has authority to act after a breach. The code can then implement the approved rule and the validation suit can test it.
+Matthew C Helton 4 minutes 21 seconds
+LLY remains outside the allocation engine because a single stock would undermine the ETF mandate's diversification.
+

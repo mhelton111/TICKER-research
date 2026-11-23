@@ -1,0 +1,23 @@
+OpenAI Codex assisted implementation and documentation, but I checked the analysis and own the decision.
+
+This is educational analysis only and not investment advice.
+
+Video 1 Research Evolution
+The Meridian Reserve Decision Desk. Codex assisted implementation and documentation, but I checked the analysis and owned the recommendation. My decision is Pilot, not Adopt. The mandate requires a 6.5% estimated annual return, at least 3% in BIL or IEF reserve assets, long-only exposure, and 5% weight increments.
+Matthew C Helton 0 minutes 22 seconds
+I keep equal weight and the 60% VTI / 40% LQD benchmark visible beside the constrained result so a committee can see each trade-off. At first, I could have focused only on the highest estimated return. The benchmark earned 7.15%, but it has no reserve assets and fails that rule.
+Matthew C Helton 0 minutes 45 seconds
+Equal weight has enough reserve, but earns, or equal weight has enough reserve, but earns only 4.52% and misses the return objective. The constrained result, 65% BIL, 30% VTI, and 5% XLV reaches 6.56% return and the 65% reserve and 5.27% estimated volatility.
+Matthew C Helton 1 minute 7 seconds
+My own judgment is that the return credibility and liquidity must be considered together. Missing a stated objective can damage confidence, but promising no losses is unrealistic because markets have down years or even down periods like we've seen in the past two weeks. The reserve sleeve protects future obligation and gives the committee a buffer
+Matthew C Helton 1 minute 25 seconds
+when conditions are weak. I'm not calling BIL return engine. It is the liquidity control while VTI and XLV provide return exposure. Removing it simply to improve expected return would solve the wrong problem. The benchmark clears the return number but fails the reserve mandate. As you can see, each weight down here in an interactive
+Matthew C Helton 1 minute 45 seconds
+graph found here. As you might see, LLY is found on a couple of different tabs. LLY is context, not a portfolio holding. It is a high-growth company example from my earlier labs, but one stock would change the diversified ETF mandate and add concentration risk.
+Matthew C Helton 2 minutes 8 seconds
+Its dated close is kept separate from the ETF input history. One check that matters to me is the no feasible portfolio test. When I ask for an intentional and impossible 50% return with a 90% reserve, the model returns no feasible mix. That is the right behavior. A weaker tool might still present a portfolio and make it look authoritative.
+Matthew C Helton 2 minutes 28 seconds
+I would rather have the system stop and require a committee discussion than hide an impossible trade-off. Just to show my interactive graph, if we were to just move it all the way up, you see the no feasible right here. The process changed from finding an attractive allocation to giving a committee feasible trade-offs and reproducible checks.
+Matthew C Helton 2 minutes 48 seconds
+That is why I recommend a paper pilot, not live adoption.
+
